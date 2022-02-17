@@ -19,11 +19,17 @@ const App = () => {
 
 
   return (
-    <ul>
-      {myList.map(obj => (
-        <li key={obj.id}>{obj.msg}</li>
-      ))}
-        </ul>
+    <main className='container mt-5'>
+      <section className='row justify-content-center'>
+        <div className="col-4">
+          <ul className="list-group">
+            {myList.map(obj => (
+              <li className='list-group-item' key={obj.id}>{obj.msg}</li>
+            ))}
+          </ul>
+        </div>
+      </section>
+    </main>
   );
 };
 
