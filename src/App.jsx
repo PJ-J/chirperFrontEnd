@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 
-
 const App = () => {
   const [chirps, setChirps] = useState([
     {
@@ -73,8 +72,8 @@ const App = () => {
 
     // Save search term state to React Hooks
     setChirps((chirps) => [...chirps, obj]);
-    document.getElementById("usr").value = '';
-    document.getElementById("thoughts").value = '';
+    document.getElementById("usr").value = "";
+    document.getElementById("thoughts").value = "";
   };
   let myFancyList = chirps.map((val) => {
     return (
@@ -94,25 +93,31 @@ const App = () => {
     <main className="container mt-5">
       <section className="row justify-content-center">
         <div className="col-5 border h-50">
-        
           <div className="form-group m-2">
-            <input
-              type="text"
-              // value={query}
-              // onChange={(e) => setQuery(e.target.value)}
-              className="form-control"
-              placeholder="Username"
-              id="usr"
-            />
+            <div className="row justify-content-start">
+              <i className="fa-solid fa-id-card fa-lg pr-2 mt-3"></i>
+              <input
+                type="text"
+                // value={query}
+                // onChange={(e) => setQuery(e.target.value)}
+                className="form-control col"
+                placeholder="Username"
+                id="usr"
+              />
+            </div>
           </div>
           <div className="form-group m-2">
-            <textarea
-              className="form-control"
-              placeholder="Your thoughts"
-              cols="30"
-              rows="10"
-              id="thoughts"
-            ></textarea>
+            <div className="row justify-content-start">
+              <i className="fa-solid fa-pen-clip fa-lg pr-2 mt-3"></i>
+
+              <textarea
+                className="form-control col"
+                placeholder="Your thoughts"
+                cols="30"
+                rows="10"
+                id="thoughts"
+              ></textarea>
+            </div>
             <button
               onClick={handleClick}
               type="button"
