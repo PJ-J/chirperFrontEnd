@@ -1,37 +1,35 @@
-import React from "react";
+import React, { useState } from "react";
 
 const App = () => {
-  const myList = [
+  const [username, setUsername] = useState("");
+
+  let myList = [
     {
       key: 1,
-      dateTime: "jan",
+      dateTime: "Fri Feb 18 2022 4:17 pm",
       username: "donny",
       thoughts: "crabcakes",
     },
     {
       key: 2,
-      dateTime: "",
+      dateTime: "Fri Feb 18 2022 4:17 pm",
       username: "jonny",
       thoughts: "hotdog",
     },
     {
       key: 3,
-      dateTime: "",
+      dateTime: "Fri Feb 18 2022 4:17 pm",
       username: "lonny",
       thoughts: "pizza",
     },
   ];
 
-  const myFancyList = myList.map((val) => {
-    return <li className="list-group-item">@{val.dateTime}</li>;
-  });
-
   let i = 4;
 
   // console.log(formatAMPM(new Date()));
 
-//using your function (passing in date)
-function formatAMPM(date) {
+  //using your function (passing in date)
+  function formatAMPM(date) {
     // gets the hours
     var hours = date.getHours();
     // gets the day
@@ -39,41 +37,29 @@ function formatAMPM(date) {
     // gets the month
     var minutes = date.getMinutes();
     // gets AM/PM
-    var ampm = hours >= 12 ? 'pm' : 'am';
+    var ampm = hours >= 12 ? "pm" : "am";
     // converts hours to 12 hour instead of 24 hour
     hours = hours % 12;
     // converts 0 (midnight) to 12
     hours = hours ? hours : 12; // the hour '0' should be '12'
     // converts minutes to have leading 0
-    minutes = minutes < 10 ? '0'+ minutes : minutes;
-  
+    minutes = minutes < 10 ? "0" + minutes : minutes;
+
     // the time string
-    var time = hours + ':' + minutes + ' ' + ampm;
-  
+    var time = hours + ":" + minutes + " " + ampm;
+
     // gets the match for the date string we want
     var match = date.toString().match(/\w{3} \w{3} \d{1,2} \d{4}/);
-  
-    //the result
-    return match[0] + ' ' + time;
-}
 
-  const makeCard = () => {
+    //the result
+    return match[0] + " " + time;
+  }
+
+  function makeCard(e) {
+    e.preventDefault();
     let user = document.getElementById("usr").value;
     let thoughts = document.getElementById("thoughts").value;
 
-       // return (
-    //   // <div className="card">
-    //   //           <div className="card-header">
-    //   //             Quote
-    //   //           </div>
-    //   //           <div className="card-body">
-    //   //             <blockquote className="blockquote mb-0">
-    //   //               <p>{thoughts}</p>
-    //   //               <footer className="blockquote-footer">{user}</footer>
-    //   //             </blockquote>
-    //   //           </div>
-    //   //         </div>
-    // )
     let obj = {
       key: i,
       dateTime: formatAMPM(new Date()),
@@ -82,15 +68,23 @@ function formatAMPM(date) {
     };
     myList.push(obj);
     console.log(myList);
-    let li = document.createElement("li");
-    li.textContent = `${formatAMPM(new Date())}:
-     @${user} `;
-
-    li.className = "list-group-item";
-    let node = document.getElementById("chirpList");
-    node.appendChild(li);
+    
+    console.log(myFancyList);
     i++;
-  };
+  }
+  let myFancyList = myList.map((val) => {
+    return (
+      <div className="card">
+        <div className="card-header">{val.dateTime}</div>
+        <div className="card-body">
+          <blockquote className="blockquote mb-0">
+            <p>{val.thoughts}</p>
+            <footer className="blockquote-footer">@{val.username}</footer>
+          </blockquote>
+        </div>
+      </div>
+    );
+  });
 
   return (
     <main className="container mt-5">
@@ -99,6 +93,8 @@ function formatAMPM(date) {
           <div className="form-group m-2">
             <input
               type="text"
+              value={username}
+              onChange={e => setUsername(e.target.value)}
               className="form-control"
               placeholder="Username"
               id="usr"
