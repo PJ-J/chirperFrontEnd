@@ -73,6 +73,8 @@ const App = () => {
 
     // Save search term state to React Hooks
     setChirps((chirps) => [...chirps, obj]);
+    document.getElementById("usr").value = '';
+    document.getElementById("thoughts").value = '';
   };
   let myFancyList = chirps.map((val) => {
     return (
@@ -96,8 +98,8 @@ const App = () => {
           <div className="form-group m-2">
             <input
               type="text"
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
+              // value={query}
+              // onChange={(e) => setQuery(e.target.value)}
               className="form-control"
               placeholder="Username"
               id="usr"
