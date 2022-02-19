@@ -1,16 +1,17 @@
 import React, { useState } from "react";
 
+
 const App = () => {
   const [chirps, setChirps] = useState([
     {
       key: 1,
-      dateTime: "Fri Feb 18 2022 4:17 pm",
+      dateTime: "Fri Feb 18 2022 3:07 pm",
       username: "donny",
       thoughts: "crabcakes",
     },
     {
       key: 2,
-      dateTime: "Fri Feb 18 2022 4:17 pm",
+      dateTime: "Fri Feb 18 2022 3:30 pm",
       username: "jonny",
       thoughts: "hotdog",
     },
@@ -21,28 +22,7 @@ const App = () => {
       thoughts: "pizza",
     },
   ]);
-  const [query, setQuery] = useState('');
-
-  // const prevChirps = [
-  //   {
-  //     key: 1,
-  //     dateTime: "Fri Feb 18 2022 4:17 pm",
-  //     username: "donny",
-  //     thoughts: "crabcakes",
-  //   },
-  //   {
-  //     key: 2,
-  //     dateTime: "Fri Feb 18 2022 4:17 pm",
-  //     username: "jonny",
-  //     thoughts: "hotdog",
-  //   },
-  //   {
-  //     key: 3,
-  //     dateTime: "Fri Feb 18 2022 4:17 pm",
-  //     username: "lonny",
-  //     thoughts: "pizza",
-  //   },
-  // ];
+  const [query, setQuery] = useState("");
 
   let i = 4;
 
@@ -75,24 +55,8 @@ const App = () => {
     return match[0] + " " + time;
   }
 
-  // function makeCard(e) {
-  //   e.preventDefault();
-  //   let user = document.getElementById("usr").value;
-  //   let thoughts = document.getElementById("thoughts").value;
-
-  //   let obj = {
-  //     key: i,
-  //     dateTime: formatAMPM(new Date()),
-  //     username: user,
-  //     thoughts: thoughts,
-  //   };
-  //   myList.push(obj);
-  //   console.log(myList);
-    
-  //   console.log(myFancyList);
-  //   i++;
-  // }
-  const handleClick = () => { // Save search term state to React Hooks
+  const handleClick = () => {
+    // Save search term state to React Hooks
     let user = document.getElementById("usr").value;
     let thoughts = document.getElementById("thoughts").value;
 
@@ -102,18 +66,14 @@ const App = () => {
       username: user,
       thoughts: thoughts,
     };
-    // chirps.push(obj);
-    // console.log(chirps);
-    
-    // console.log(myFancyList);
+
     i++;
     // Add the search term to the list onClick of Search button
     // (Actually searching would require an API call here)
 
     // Save search term state to React Hooks
-    setChirps(chirps => [...chirps, obj])
-    // setSearches(searches => searches.concat(query))
-  }
+    setChirps((chirps) => [...chirps, obj]);
+  };
   let myFancyList = chirps.map((val) => {
     return (
       <div className="card">
@@ -132,11 +92,12 @@ const App = () => {
     <main className="container mt-5">
       <section className="row justify-content-center">
         <div className="col-5 border h-50">
+        
           <div className="form-group m-2">
             <input
               type="text"
               value={query}
-              onChange={e => setQuery(e.target.value)}
+              onChange={(e) => setQuery(e.target.value)}
               className="form-control"
               placeholder="Username"
               id="usr"
