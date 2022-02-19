@@ -1,9 +1,7 @@
 import React, { useState } from "react";
 
 const App = () => {
-  const [username, setUsername] = useState("");
-
-  let myList = [
+  const [chirps, setChirps] = useState([
     {
       key: 1,
       dateTime: "Fri Feb 18 2022 4:17 pm",
@@ -22,7 +20,29 @@ const App = () => {
       username: "lonny",
       thoughts: "pizza",
     },
-  ];
+  ]);
+  const [query, setQuery] = useState('');
+
+  // const prevChirps = [
+  //   {
+  //     key: 1,
+  //     dateTime: "Fri Feb 18 2022 4:17 pm",
+  //     username: "donny",
+  //     thoughts: "crabcakes",
+  //   },
+  //   {
+  //     key: 2,
+  //     dateTime: "Fri Feb 18 2022 4:17 pm",
+  //     username: "jonny",
+  //     thoughts: "hotdog",
+  //   },
+  //   {
+  //     key: 3,
+  //     dateTime: "Fri Feb 18 2022 4:17 pm",
+  //     username: "lonny",
+  //     thoughts: "pizza",
+  //   },
+  // ];
 
   let i = 4;
 
@@ -55,8 +75,24 @@ const App = () => {
     return match[0] + " " + time;
   }
 
-  function makeCard(e) {
-    e.preventDefault();
+  // function makeCard(e) {
+  //   e.preventDefault();
+  //   let user = document.getElementById("usr").value;
+  //   let thoughts = document.getElementById("thoughts").value;
+
+  //   let obj = {
+  //     key: i,
+  //     dateTime: formatAMPM(new Date()),
+  //     username: user,
+  //     thoughts: thoughts,
+  //   };
+  //   myList.push(obj);
+  //   console.log(myList);
+    
+  //   console.log(myFancyList);
+  //   i++;
+  // }
+  const handleClick = () => { // Save search term state to React Hooks
     let user = document.getElementById("usr").value;
     let thoughts = document.getElementById("thoughts").value;
 
@@ -66,13 +102,19 @@ const App = () => {
       username: user,
       thoughts: thoughts,
     };
-    myList.push(obj);
-    console.log(myList);
+    // chirps.push(obj);
+    // console.log(chirps);
     
-    console.log(myFancyList);
+    // console.log(myFancyList);
     i++;
+    // Add the search term to the list onClick of Search button
+    // (Actually searching would require an API call here)
+
+    // Save search term state to React Hooks
+    setChirps(chirps => [...chirps, obj])
+    // setSearches(searches => searches.concat(query))
   }
-  let myFancyList = myList.map((val) => {
+  let myFancyList = chirps.map((val) => {
     return (
       <div className="card">
         <div className="card-header">{val.dateTime}</div>
@@ -89,12 +131,12 @@ const App = () => {
   return (
     <main className="container mt-5">
       <section className="row justify-content-center">
-        <div className="col-5 border">
+        <div className="col-5 border h-50">
           <div className="form-group m-2">
             <input
               type="text"
-              value={username}
-              onChange={e => setUsername(e.target.value)}
+              value={query}
+              onChange={e => setQuery(e.target.value)}
               className="form-control"
               placeholder="Username"
               id="usr"
@@ -109,7 +151,7 @@ const App = () => {
               id="thoughts"
             ></textarea>
             <button
-              onClick={makeCard}
+              onClick={handleClick}
               type="button"
               className="btn btn-primary mt-2"
               id="chirpBtn"
