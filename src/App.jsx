@@ -6,26 +6,24 @@ const App = () => {
       key: 1,
       dateTime: "Fri Feb 18 2022 3:07 pm",
       username: "donny",
-      thoughts: "crabcakes",
+      thoughts: "Hello",
     },
     {
       key: 2,
       dateTime: "Fri Feb 18 2022 3:30 pm",
       username: "jonny",
-      thoughts: "hotdog",
+      thoughts: "You won't believe this",
     },
     {
       key: 3,
       dateTime: "Fri Feb 18 2022 4:17 pm",
       username: "lonny",
-      thoughts: "pizza",
+      thoughts: "Here's my thoughts",
     },
   ]);
   const [query, setQuery] = useState("");
 
   let i = 4;
-
-  // console.log(formatAMPM(new Date()));
 
   //using your function (passing in date)
   function formatAMPM(date) {
@@ -55,7 +53,7 @@ const App = () => {
   }
 
   const handleClick = () => {
-    // Save search term state to React Hooks
+    
     let user = document.getElementById("usr").value;
     let thoughts = document.getElementById("thoughts").value;
 
@@ -67,10 +65,7 @@ const App = () => {
     };
 
     i++;
-    // Add the search term to the list onClick of Search button
-    // (Actually searching would require an API call here)
-
-    // Save search term state to React Hooks
+   
     setChirps((chirps) => [...chirps, obj]);
     document.getElementById("usr").value = "";
     document.getElementById("thoughts").value = "";
@@ -98,8 +93,6 @@ const App = () => {
               <i className="fa-solid fa-id-card fa-lg pr-2 mt-3"></i>
               <input
                 type="text"
-                // value={query}
-                // onChange={(e) => setQuery(e.target.value)}
                 className="form-control col"
                 placeholder="Username"
                 id="usr"
